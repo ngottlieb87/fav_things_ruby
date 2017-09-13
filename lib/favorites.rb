@@ -1,3 +1,4 @@
+require('pry')
 class Item
   @@list = []
   attr_reader(:id)
@@ -24,7 +25,16 @@ class Item
   def save()
     @@list.push(self)
   end
+  def delete(del)
+    @@list.each do |item|
+      if item.name == del
+      item.rank = ""
+      item.name = ""
+      end
+    end
+  end
   def self.sort()
     @@list.sort_by {|x| x.rank}
   end
+  # binding.pry
 end
