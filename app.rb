@@ -2,6 +2,8 @@ require('sinatra')
 require('sinatra/reloader')
 also_reload('lib/**/*.rb')
 require('./lib/favorites')
+require("rspec")
+require("pry")
 
 get('/') do
   @list = Item.all()
@@ -10,9 +12,11 @@ end
 
 post('/') do
   name = params["name"]
-  item = Item.new(name)
+  rank = params["rank"]
+  item = Item.new(name,rank)
+  @rank = item.rank
   item.save()
-  @list = Item.all()
+  @list= Item.sort()
   erb(:list)
 end
 

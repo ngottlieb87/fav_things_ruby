@@ -1,8 +1,9 @@
 class Item
   @@list = []
   attr_reader(:id)
-  attr_accessor(:name)
-  def initialize(name)
+  attr_accessor(:name, :rank)
+  def initialize(name,rank)
+    @rank = rank
     @name = name
     @id = @@list.length + 1
   end
@@ -22,5 +23,8 @@ class Item
   end
   def save()
     @@list.push(self)
+  end
+  def self.sort()
+    @@list.sort_by {|x| x.rank}
   end
 end
