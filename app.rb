@@ -19,13 +19,26 @@ post('/') do
   @list= Item.sort()
   erb(:list)
 end
+
 post('/delete') do
   del = params["del"]
   delete = Item.delete(del)
   @list= Item.sort()
   erb(:list)
 end
+
 get('/items/:id') do
   @item = Item.find(params[:id])
   erb(:item)
+end
+
+post('/update') do
+  name = params["name"]
+  rank = params["rank"]
+  item= Item.new(name,rank)
+  item.update()
+  item.save()
+  Item.sort
+  @list = Item.all()
+  erb(:list)
 end
